@@ -1,0 +1,42 @@
+<ui:composition 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/templates/template.xhtml">
+	
+	<ui:define name="metadata">
+	</ui:define>
+	<ui:define name="content">
+		<h:form>
+
+        <p:panel header="Batch Upload">
+            <h:panelGrid columns="2" cellpadding="4">
+                <h:outputText value="mid" />
+                <p:inputText value="#{batchUpload.mid}" />
+
+                <h:outputText value="tid" />
+                <p:inputText value="#{batchUpload.tid}" />
+                
+                <h:outputText value="timeout" />
+                <p:inputText value="#{batchUpload.timeout}" />
+                
+                <h:outputText value="nonces" />
+                <p:inputTextarea value="#{batchUpload.nonces}" />
+
+                <p:commandButton value="Submit" update="output" 
+                			action="#{batchUpload.command()}" />
+            </h:panelGrid>
+        </p:panel>
+        
+        <p:panel header="Output">
+        	<pre>
+                <h:inputTextarea id="output" style="border:none;" cols="50" rows="15" 
+						readonly="true" value="#{batchUpload.output}"/>
+            </pre>
+        </p:panel>
+
+    </h:form>
+	</ui:define>
+</ui:composition>

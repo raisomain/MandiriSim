@@ -1,0 +1,46 @@
+<ui:composition 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/templates/template.xhtml">
+	<ui:define name="metadata">
+	</ui:define>
+	<ui:define name="content">
+		<h:form>
+			<p:panel header="Authorize Capture">
+				<h:panelGrid columns="2" cellpadding="4">
+					<h:outputText value="mid" />
+					<p:inputText value="#{authorizeCapture.mid}" />
+
+					<h:outputText value="tid" />
+					<p:inputText value="#{authorizeCapture.tid}" />
+
+					<h:outputText value="amount" />
+					<p:inputText value="#{authorizeCapture.grossAmount}" />
+
+					<h:outputText value="card number" />
+					<p:inputText value="#{authorizeCapture.ccNumber}" />
+
+					<h:outputText value="card expire" />
+					<p:inputText value="#{authorizeCapture.ccExpire}" />
+
+					<h:outputText value="card cvv" />
+					<p:inputText value="#{authorizeCapture.ccCVV}" />
+
+					<p:commandButton value="Submit" update="output" 
+						action="#{authorizeCapture.command()}" />
+				</h:panelGrid>
+			</p:panel>
+
+			<p:panel header="Output">
+				<pre>
+                <h:inputTextarea id="output" style="border:none;" cols="50" rows="15" 
+						readonly="true" value="#{authorizeCapture.output}"/>
+                </pre>
+			</p:panel>
+
+		</h:form>
+	</ui:define>
+</ui:composition>

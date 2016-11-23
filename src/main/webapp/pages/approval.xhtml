@@ -1,0 +1,22 @@
+<ui:composition 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/templates/template.xhtml">
+	
+	<ui:define name="metadata">
+	</ui:define>
+
+	<ui:define name="content">
+		<h:form>
+			<p:panel header="Approval">
+				<p:lightBox iframe="true" id="auth">
+					<iframe id="targetFrame" height="500" width="450" src="#{token3DSecure.redirectUrl}" />
+				</p:lightBox>
+			</p:panel>
+			<p:commandButton value="Charge" action="#{token3DSecure.process()}" />
+		</h:form>
+	</ui:define>
+</ui:composition>

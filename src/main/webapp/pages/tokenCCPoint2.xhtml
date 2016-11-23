@@ -1,0 +1,41 @@
+<ui:composition 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/templates/template.xhtml">
+	
+	<ui:define name="metadata">
+	</ui:define>
+	
+	<ui:define name="content">
+		<h:form>
+			<p:panel header="Token CC Point">
+				<h:panelGrid columns="2" cellpadding="4">
+
+					<h:outputText value="Card Number" />
+					<p:inputText value="#{tokenCCPoint.cardNumber}" />
+					<h:outputText value="Card Expiry Month" />
+					<p:inputText value="#{tokenCCPoint.cardExpMonth}" />
+					<h:outputText value="Card Expiry Year" />
+					<p:inputText value="#{tokenCCPoint.cardExpYear}" />
+					<h:outputText value="Card CVV" />
+					<p:inputText value="#{tokenCCPoint.cvv}" />
+					<h:outputText value="Gross Amount" />
+					<p:inputText value="#{tokenCCPoint.grossAmount}" />
+
+					<p:commandButton value="Submit" update="output" action="#{tokenCCPoint.command2()}" />
+				</h:panelGrid>
+			</p:panel>
+
+			<p:panel header="Output">
+				<pre>
+                <h:inputTextarea id="output" style="border:none;" cols="50" rows="15" 
+						readonly="true" value="#{tokenCCPoint.output}"/>
+                </pre>
+			</p:panel>
+
+		</h:form>
+	</ui:define>
+</ui:composition>

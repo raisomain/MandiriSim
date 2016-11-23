@@ -1,0 +1,38 @@
+<ui:composition 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/templates/template.xhtml">
+	
+	<ui:define name="metadata">
+	</ui:define>
+	
+	<ui:define name="content">
+		<h:form>
+			<p:panel header="Charge CC Point">
+				<h:panelGrid columns="2" cellpadding="4">
+					<h:outputText value="Token Id" />
+					<h:outputText value="#{chargeCCPoint.tokenId}" />
+					<h:outputText value="Order Id" />
+					<p:inputText value="#{chargeCCPoint.orderId}" />
+					<h:outputText value="Gross amount" />
+					<p:inputText value="#{chargeCCPoint.grossAmount}" />
+					<h:outputText value="Point Redeem Amount" />
+					<p:inputText value="#{chargeCCPoint.pointRedeemAmount}" />
+
+					<p:commandButton value="Submit" update="output" action="#{chargeCCPoint.command()}" />
+				</h:panelGrid>
+			</p:panel>
+
+			<p:panel header="Output">
+				<pre>
+                <h:inputTextarea id="output" style="border:none;" cols="50" rows="15" 
+						readonly="true" value="#{chargeCCPoint.output}"/>
+            	</pre>
+			</p:panel>
+
+		</h:form>
+	</ui:define>
+</ui:composition>

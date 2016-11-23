@@ -1,0 +1,42 @@
+<ui:composition 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/templates/template.xhtml">
+	
+	<ui:define name="metadata">
+	</ui:define>
+	
+	<ui:define name="content">
+		<h:form>
+			<p:panel header="Token 3D Secure">
+				<h:panelGrid columns="2" cellpadding="4">
+
+					<h:outputText value="Card Number" />
+					<p:inputText value="#{token3DSecure.cardNumber}" />
+					<h:outputText value="Card CVV" />
+					<p:inputText value="#{token3DSecure.cvv}" />
+					<h:outputText value="Card Expiry Month" />
+					<p:inputText value="#{token3DSecure.cardExpMonth}" />
+					<h:outputText value="Card Expiry Year" />
+					<p:inputText value="#{token3DSecure.cardExpYear}" />
+					<h:outputText value="Gross Amount" />
+					<p:inputText value="#{token3DSecure.grossAmount}" />
+					
+					<p:commandButton value="Submit" update="output" 
+								action="#{token3DSecure.command()}" />
+				</h:panelGrid>
+			</p:panel>
+
+			<p:panel header="Output">
+				<pre>
+                <h:inputTextarea id="output" style="border:none;" cols="70" rows="15" 
+						readonly="true" value="#{token3DSecure.output}"/>
+                </pre>
+			</p:panel>
+
+		</h:form>
+	</ui:define>
+</ui:composition>
