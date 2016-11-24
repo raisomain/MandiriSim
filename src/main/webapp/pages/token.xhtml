@@ -11,19 +11,27 @@
 	
 	<ui:define name="content">
 		<h:form>
+		
 			<p:panel header="Token">
-				<h:panelGrid columns="2" cellpadding="4">
+				<h:panelGrid id="grid" columns="3" cellpadding="4">
 
-					<h:outputText value="Card Number" />
-					<p:inputText value="#{token.cardNumber}" />
-					<h:outputText value="Card Expiry Month" />
-					<p:inputText value="#{token.cardExpMonth}" />
-					<h:outputText value="Card Expiry Year" />
-					<p:inputText value="#{token.cardExpYear}" />
-					<h:outputText value="Card CVV" />
-					<p:inputText value="#{token.cvv}" />
+					<p:outputLabel value="Card Number" />
+					<p:inputText value="#{token.cardNumber}" id="cardNumber" required="true"/>
+					<p:message for="cardNumber" display="icon" />
+					
+					<p:outputLabel value="Card Expiry Month" />
+					<p:inputText value="#{token.cardExpMonth}" id="cardExpMonth" required="true"/>
+					<p:message for="cardExpMonth" display="icon" />
+					
+					<p:outputLabel value="Card Expiry Year" />
+					<p:inputText value="#{token.cardExpYear}" id="cardExpYear" required="true"/>
+					<p:message for="cardExpYear" display="icon" />
+					
+					<p:outputLabel value="Card CVV" />
+					<p:inputText value="#{token.cvv}" id="cvv" required="true"/>
+					<p:message for="cvv" display="icon" />
 
-					<p:commandButton value="Submit" update="output" action="#{token.command()}" />
+					<p:commandButton value="Submit" update="output grid" action="#{token.command()}" />
 				</h:panelGrid>
 			</p:panel>
 

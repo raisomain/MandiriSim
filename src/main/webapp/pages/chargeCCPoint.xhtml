@@ -11,18 +11,23 @@
 	
 	<ui:define name="content">
 		<h:form>
-			<p:panel header="Charge CC Point">
-				<h:panelGrid columns="2" cellpadding="4">
-					<h:outputText value="Token Id" />
-					<h:outputText value="#{chargeCCPoint.tokenId}" />
+			<p:panel header="Charge CC Point: #{chargeCCPoint.tokenId}">
+				<h:panelGrid id="grid" columns="3" cellpadding="4">
+				
 					<h:outputText value="Order Id" />
-					<p:inputText value="#{chargeCCPoint.orderId}" />
+					<p:inputText value="#{chargeCCPoint.orderId}" id="orderId" required="true"/>
+					<p:message for="orderId" display="icon" />
+					
 					<h:outputText value="Gross amount" />
-					<p:inputText value="#{chargeCCPoint.grossAmount}" />
+					<p:inputText value="#{chargeCCPoint.grossAmount}" id="grossAmount" required="true"/>
+					<p:message for="grossAmount" display="icon" />
+					
 					<h:outputText value="Point Redeem Amount" />
-					<p:inputText value="#{chargeCCPoint.pointRedeemAmount}" />
+					<p:inputText value="#{chargeCCPoint.pointRedeemAmount}" id="pointRedeem" required="true"/>
+					<p:message for="pointRedeem" display="icon" />
 
-					<p:commandButton value="Submit" update="output" action="#{chargeCCPoint.command()}" />
+					<p:commandButton value="Submit" update="output grid" action="#{chargeCCPoint.command()}" 
+										disabled="#{chargeCCPoint.tokenId eq null}"/>
 				</h:panelGrid>
 			</p:panel>
 

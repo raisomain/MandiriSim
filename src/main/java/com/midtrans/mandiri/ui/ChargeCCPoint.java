@@ -7,6 +7,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import org.javalite.http.Http;
@@ -17,7 +18,7 @@ import com.eclipsesource.json.Json;
 import com.eclipsesource.json.WriterConfig;
 
 @ManagedBean
-@SessionScoped
+@ViewScoped
 public class ChargeCCPoint implements Serializable {
 
 	private static final long serialVersionUID = 4793170495874127423L;
@@ -26,7 +27,7 @@ public class ChargeCCPoint implements Serializable {
 	
 	private String content = "{\"payment_type\":\"credit_card\",\"transaction_details\":{\"order_id\":\"%s\",\"gross_amount\":%s},\"credit_card\":{\"token_id\":\"%s\",\"point_redeem_amount\":%s,\"bank\":\"%s\"}}";
 
-	private String orderId; // "TEST-POINT-{{$timestamp}}"
+	private String orderId;
 	
 	private String grossAmount;
 	

@@ -12,20 +12,24 @@
 		<h:form>
 
         <p:panel header="Settlement">
-            <h:panelGrid columns="2" cellpadding="4">
+            <h:panelGrid id="grid" columns="3" cellpadding="4">
                 <h:outputText value="mid" />
-                <p:inputText value="#{settlement.mid}" />
+                <p:inputText value="#{settlement.mid}" id="mid" required="true"/>
+				<p:message for="mid" display="icon" />
 
                 <h:outputText value="tid" />
-                <p:inputText value="#{settlement.tid}" />
+                <p:inputText value="#{settlement.tid}" id="tid" required="true"/>
+				<p:message for="tid" display="icon" />
                 
                 <h:outputText value="timeout" />
-                <p:inputText value="#{settlement.timeout}" />
+                <p:inputText value="#{settlement.timeout}" id="timeout" required="true"/>
+				<p:message for="timeout" display="icon" />
                 
                 <h:outputText value="nonces" />
-                <p:inputTextarea value="#{settlement.nonces}" />
+                <p:inputTextarea value="#{settlement.nonces}" id="nonces" required="true"/>
+				<p:message for="nonces" display="icon" />
 
-                <p:commandButton value="Submit" update="output" 
+                <p:commandButton value="Submit" update="output grid" 
                 			action="#{settlement.command()}" />
             </h:panelGrid>
         </p:panel>

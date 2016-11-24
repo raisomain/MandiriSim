@@ -1,7 +1,9 @@
 package com.midtrans.mandiri.ui;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -16,6 +18,7 @@ import com.eclipsesource.json.Json;
 import com.eclipsesource.json.JsonObject;
 import com.eclipsesource.json.JsonValue;
 import com.eclipsesource.json.WriterConfig;
+import com.midtrans.mandiri.entity.Item;
 
 @ManagedBean(name = "token")
 @SessionScoped
@@ -43,6 +46,11 @@ public class Token implements Serializable {
 	private String tokenId;
 	private String output;
 	
+	@PostConstruct
+    private void init(){
+		output = null;
+    }
+	
 	public String command() {
 		String url = String.format(endPoint, cardNumber, cvv, cardExpMonth, cardExpYear, clientKey, vtKey, ipAddress);
 		FacesContext context = FacesContext.getCurrentInstance();
@@ -50,8 +58,7 @@ public class Token implements Serializable {
 		Get get = Http.get(url);
     	
 		try {
-			output = get.text();
-			output = Json.parse(output).toString(WriterConfig.PRETTY_PRINT);
+			output = Json.parse(get.text()).toString(WriterConfig.PRETTY_PRINT);
 			System.out.println(output);
 			
 	    	JsonObject outputObject = Json.parse(output).asObject();

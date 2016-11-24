@@ -11,33 +11,55 @@
 
 	<ui:define name="content">
 		<h:form>
-			<p:panel header="Charge 3D Secure">
-				<h:panelGrid columns="2" cellpadding="4">
-					<h:outputText value="Token Id" />
-					<h:outputText value="#{charge3DSecure.tokenId}" />
+			<p:panel header="Charge 3DSecure: #{charge3DSecure.tokenId}">
+				<h:panelGrid id="grid" columns="3" cellpadding="4">
+					
 					<h:outputText value="Order Id" />
-					<p:inputText value="#{charge3DSecure.orderId}" />
+					<p:inputText value="#{charge3DSecure.orderId}" id="orderId" required="true"/>
+					<p:message for="orderId" display="icon" />
+					
 					<h:outputText value="FirstName" />
-					<p:inputText value="#{charge3DSecure.firstName}" />
+					<p:inputText value="#{charge3DSecure.firstName}" id="firstName" required="true"/>
+					<p:message for="firstName" display="icon" />
+					
 					<h:outputText value="Last Name" />
-					<p:inputText value="#{charge3DSecure.lastName}" />
+					<p:inputText value="#{charge3DSecure.lastName}" id="lastName" required="true"/>
+					<p:message for="lastName" display="icon" />
+					
 					<h:outputText value="Phone" />
-					<p:inputText value="#{charge3DSecure.phone}" />
+					<p:inputText value="#{charge3DSecure.phone}" id="phone" required="true"/>
+					<p:message for="phone" display="icon" />
+					
 					<h:outputText value="E-Mail" />
-					<p:inputText value="#{charge3DSecure.eMail}" />
+					<p:inputText value="#{charge3DSecure.eMail}" id="eMail" required="true"/>
+					<p:message for="eMail" display="icon" />
+					
 					<h:outputText value="Address" />
-					<p:inputText value="#{charge3DSecure.address}" />
+					<p:inputText value="#{charge3DSecure.address}" id="address" required="true"/>
+					<p:message for="address" display="icon" />
+					
 					<h:outputText value="City" />
-					<p:inputText value="#{charge3DSecure.city}" />
+					<p:inputText value="#{charge3DSecure.city}" id="city" required="true"/>
+					<p:message for="city" display="icon" />
+					
 					<h:outputText value="Postal Code" />
-					<p:inputText value="#{charge3DSecure.postalCode}" />
+					<p:inputText value="#{charge3DSecure.postalCode}" id="postalCode" required="true"/>
+					<p:message for="postalCode" display="icon" />
+					
 					<h:outputText value="Gross Amount" />
 					<h:outputText value="#{charge3DSecure.grossAmount}" id="amount"/>
+					
 				</h:panelGrid>
 
-				<p:commandButton value="new item" oncomplete="PF('itemDialog').show()" />
-				
+				<p:commandButton value="new item" oncomplete="PF('itemDialog').show()" 
+									disabled="#{charge.tokenId eq null}"/>
+				<br/>
+				<br/>
 				<p:dataTable id="datatable" var="item" value="#{charge3DSecure.items}">
+					<p:column width="40">
+						<p:commandButton icon="ui-icon-trash" title="delete" 
+							actionListener="#{charge3DSecure.removeItem(item)}" update="datatable"/>
+					</p:column>
 					<p:column headerText="Id">
 						<h:outputText value="#{item.id}" />
 					</p:column>
@@ -52,21 +74,26 @@
 					</p:column>
 				</p:dataTable>
 				<br/>
-				<p:commandButton value="Submit" update="output" action="#{charge3DSecure.command()}" />
+				<p:commandButton value="Submit" update="output grid" action="#{charge3DSecure.command()}" 
+									disabled="#{charge.tokenId eq null}"/>
 
-				<p:dialog header="new item" widgetVar="itemDialog" resizable="false">
+				<p:dialog header="new item" widgetVar="itemDialog" resizable="false" closable="true">
 					<p:outputPanel id="itemDetail">
-						<h:panelGrid columns="2" columnClasses="label,value"  cellpadding="2">
+						<h:panelGrid id="grid2" columns="2" cellpadding="2">
 							<h:outputText value="Id" />
-							<h:inputText value="#{charge3DSecure.item.id}" />
+							<h:inputText value="#{charge3DSecure.item.id}"/>
+							
 							<h:outputText value="Price" />
 							<h:inputText value="#{charge3DSecure.item.price}" />
+							
 							<h:outputText value="Quantity" />
 							<h:inputText value="#{charge3DSecure.item.quantity}" />
+							
 							<h:outputText value="Name" />
 							<h:inputText value="#{charge3DSecure.item.name}" />
+							
 						</h:panelGrid>
-						<p:commandButton onclick="PF('itemDialog').close()" value="save item" 
+						<p:commandButton onclick="PF('itemDialog').close()" value="save" 
 							actionListener="#{charge3DSecure.addItem()}" update="amount"/>
 					</p:outputPanel>
 				</p:dialog>

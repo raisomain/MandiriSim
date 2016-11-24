@@ -12,12 +12,13 @@
 	<ui:define name="content">
 		<h:form>
 			<p:panel header="Reversal">
-				<h:panelGrid columns="2" cellpadding="4">
+				<h:panelGrid id="grid" columns="3" cellpadding="4">
 
 					<h:outputText value="Reference Nonce" />
-					<p:inputText value="#{reversal.refNonce}" />
-
-					<p:commandButton value="Submit" update="output" action="#{reversal.command()}" />
+					<p:inputText value="#{reversal.refNonce}" id="refNonce" required="true"/>
+					<p:message for="refNonce" display="icon" />
+					
+					<p:commandButton value="Submit" update="output grid" action="#{reversal.command()}" />
 				</h:panelGrid>
 			</p:panel>
 

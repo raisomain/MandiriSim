@@ -12,20 +12,29 @@
 	<ui:define name="content">
 		<h:form>
 			<p:panel header="Token 3D Secure">
-				<h:panelGrid columns="2" cellpadding="4">
+				<h:panelGrid id="grid" columns="3" cellpadding="4">
 
 					<h:outputText value="Card Number" />
-					<p:inputText value="#{token3DSecure.cardNumber}" />
-					<h:outputText value="Card CVV" />
-					<p:inputText value="#{token3DSecure.cvv}" />
-					<h:outputText value="Card Expiry Month" />
-					<p:inputText value="#{token3DSecure.cardExpMonth}" />
-					<h:outputText value="Card Expiry Year" />
-					<p:inputText value="#{token3DSecure.cardExpYear}" />
-					<h:outputText value="Gross Amount" />
-					<p:inputText value="#{token3DSecure.grossAmount}" />
+					<p:inputText value="#{token3DSecure.cardNumber}" id="cardNumber" required="true"/>
+					<p:message for="cardNumber" display="icon" />
 					
-					<p:commandButton value="Submit" update="output" 
+					<h:outputText value="Card CVV" />
+					<p:inputText value="#{token3DSecure.cvv}" id="cvv" required="true"/>
+					<p:message for="cvv" display="icon" />
+					
+					<h:outputText value="Card Expiry Month" />
+					<p:inputText value="#{token3DSecure.cardExpMonth}" id="cardExpMonth" required="true"/>
+					<p:message for="cardExpMonth" display="icon" />
+					
+					<h:outputText value="Card Expiry Year" />
+					<p:inputText value="#{token3DSecure.cardExpYear}" id="cardExpYear" required="true"/>
+					<p:message for="cardExpYear" display="icon" />
+					
+					<h:outputText value="Gross Amount" />
+					<p:inputText value="#{token3DSecure.grossAmount}" id="grossAmount" required="true"/>
+					<p:message for="grossAmount" display="icon" />
+					
+					<p:commandButton value="Submit" update="output grid"
 								action="#{token3DSecure.command()}" />
 				</h:panelGrid>
 			</p:panel>

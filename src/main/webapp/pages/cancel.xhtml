@@ -12,12 +12,13 @@
 	<ui:define name="content">
 		<h:form>
 			<p:panel header="Cancel">
-				<h:panelGrid columns="2" cellpadding="4">
+				<h:panelGrid id="grid" columns="3" cellpadding="4">
 
 					<h:outputText value="Order/Transaction Id" />
-					<p:inputText value="#{cancel.param}" />
+					<p:inputText value="#{cancel.param}" id="param" required="true"/>
+					<p:message for="param" display="icon" />
 
-					<p:commandButton value="Submit" update="output" action="#{cancel.command()}" />
+					<p:commandButton value="Submit" update="output grid" action="#{cancel.command()}" />
 				</h:panelGrid>
 			</p:panel>
 

@@ -11,36 +11,52 @@
 
 	<ui:define name="content">
 		<h:form>
-			<p:panel header="Charge">
-				<h:panelGrid columns="2" cellpadding="4">
-					<h:outputText value="Token Id" />
-					<h:outputText value="#{charge.tokenId}"/>
+			<p:panel header="Charge: #{charge.tokenId}">
+				<h:panelGrid id="grid" columns="3" cellpadding="4">
+				
 					<h:outputText value="Order Id" />
-					<p:inputText value="#{charge.orderId}" required="true" requiredMessage="mandatory"/>
+					<p:inputText value="#{charge.orderId}" id="orderId" required="true"/>
+					<p:message for="orderId" display="icon" />
+					
 					<h:outputText value="FirstName" />
-					<p:inputText value="#{charge.firstName}" required="true" requiredMessage="mandatory"/>
+					<p:inputText value="#{charge.firstName}" id="firstName" required="true"/>
+					<p:message for="firstName" display="icon" />
+					
 					<h:outputText value="Last Name" />
-					<p:inputText value="#{charge.lastName}" />
+					<p:inputText value="#{charge.lastName}" id="lastName" required="true"/>
+					<p:message for="lastName" display="icon" />
+					
 					<h:outputText value="Phone" />
-					<p:inputText value="#{charge.phone}" />
+					<p:inputText value="#{charge.phone}" id="phone" required="true"/>
+					<p:message for="phone" display="icon" />
+					
 					<h:outputText value="E-Mail" />
-					<p:inputText value="#{charge.eMail}" />
+					<p:inputText value="#{charge.eMail}"  id="eMail" required="true"/>
+					<p:message for="eMail" display="icon" />
+					
 					<h:outputText value="Address" />
-					<p:inputText value="#{charge.address}" />
+					<p:inputText value="#{charge.address}"  id="address" required="true"/>
+					<p:message for="address" display="icon" />
+					
 					<h:outputText value="City" />
-					<p:inputText value="#{charge.city}" />
+					<p:inputText value="#{charge.city}"  id="city" required="true"/>
+					<p:message for="city" display="icon" />
+					
 					<h:outputText value="Postal Code" />
-					<p:inputText value="#{charge.postalCode}" />
+					<p:inputText value="#{charge.postalCode}" id="postalCode" required="true"/>
+					<p:message for="postalCode" display="icon" />
+					
 					<h:outputText value="Gross Amount" />
 					<h:outputText id="amount" value="#{charge.grossAmount}" />
 				</h:panelGrid>
 
-				<p:commandButton value="new item" oncomplete="PF('itemDialog').show()" />
+				<p:commandButton value="new item" oncomplete="PF('itemDialog').show()" 
+									disabled="#{charge.tokenId eq null}"/>
 				<br/>
 				<br/>
 				<p:dataTable id="datatable" var="item" value="#{charge.items}" rowKey="#{item.id}" >
-					<p:column width="50">
-						<p:commandButton icon="ui-icon-trash" title="delete" 
+					<p:column width="40">
+						<p:commandButton icon="ui-icon-trash" title="delete"
 							actionListener="#{charge.removeItem(item)}" update="datatable"/>
 					</p:column>
 					<p:column headerText="Id">
@@ -57,22 +73,27 @@
 					</p:column>
 				</p:dataTable>
 				<br/>
-				<p:commandButton value="Submit" update="output" action="#{charge.command()}" />
+				<p:commandButton value="Submit" update="output grid" action="#{charge.command()}" 
+									disabled="#{charge.tokenId eq null}"/>
 
-				<p:dialog header="new item" widgetVar="itemDialog" resizable="false">
+				<p:dialog header="new item" widgetVar="itemDialog" resizable="false" closable="true">
 					<p:outputPanel id="itemDetail">
-						<h:panelGrid columns="2" columnClasses="label,value" cellpadding="2">
+						<h:panelGrid columns="2" cellpadding="2">
 							<h:outputText value="Id" />
 							<h:inputText value="#{charge.item.id}" />
+							
 							<h:outputText value="Price" />
 							<h:inputText value="#{charge.item.price}" />
+							
 							<h:outputText value="Quantity" />
 							<h:inputText value="#{charge.item.quantity}" />
+							
 							<h:outputText value="Name" />
 							<h:inputText value="#{charge.item.name}" />
+							
 						</h:panelGrid>
 						<p:commandButton onclick="PF('itemDialog').close()" update="amount"
-							actionListener="#{charge.addItem()}" value="save"/>
+							actionListener="#{charge.addItem()}" value="save" />
 					</p:outputPanel>
 				</p:dialog>
 			</p:panel>

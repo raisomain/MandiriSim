@@ -12,20 +12,29 @@
 	<ui:define name="content">
 		<h:form>
 			<p:panel header="Token CC Point">
-				<h:panelGrid columns="2" cellpadding="4">
+				<h:panelGrid id="grid" columns="3" cellpadding="4">
 
 					<h:outputText value="Card Number" />
-					<p:inputText value="#{tokenCCPoint.cardNumber}" />
+					<p:inputText value="#{tokenCCPoint.cardNumber}" id="cardNumber" required="true"/>
+					<p:message for="cardNumber" display="icon" />
+					
 					<h:outputText value="Card Expiry Month" />
-					<p:inputText value="#{tokenCCPoint.cardExpMonth}" />
+					<p:inputText value="#{tokenCCPoint.cardExpMonth}" id="cardExpMonth" required="true"/>
+					<p:message for="cardExpMonth" display="icon" />
+					
 					<h:outputText value="Card Expiry Year" />
-					<p:inputText value="#{tokenCCPoint.cardExpYear}" />
+					<p:inputText value="#{tokenCCPoint.cardExpYear}" id="cardExpYear" required="true"/>
+					<p:message for="cardExpYear" display="icon" />
+					
 					<h:outputText value="Card CVV" />
-					<p:inputText value="#{tokenCCPoint.cvv}" />
+					<p:inputText value="#{tokenCCPoint.cvv}" id="cvv" required="true"/>
+					<p:message for="cvv" display="icon" />
+					
 					<h:outputText value="Gross Amount" />
-					<p:inputText value="#{tokenCCPoint.grossAmount}" />
+					<p:inputText value="#{tokenCCPoint.grossAmount}" id="grossAmount" required="true"/>
+					<p:message for="grossAmount" display="icon" />
 
-					<p:commandButton value="Submit" update="output" action="#{tokenCCPoint.command()}" />
+					<p:commandButton value="Submit" update="output grid" action="#{tokenCCPoint.command()}" />
 				</h:panelGrid>
 			</p:panel>
 

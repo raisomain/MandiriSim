@@ -9,6 +9,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import org.javalite.http.Http;
@@ -22,7 +23,7 @@ import com.eclipsesource.json.WriterConfig;
 import com.midtrans.mandiri.entity.Item;
 
 @ManagedBean
-@SessionScoped
+@ViewScoped
 public class Charge3DSecure implements Serializable {
 
 	private static final long serialVersionUID = -7452904784970338648L;

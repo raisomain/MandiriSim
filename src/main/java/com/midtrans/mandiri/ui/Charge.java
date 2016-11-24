@@ -9,6 +9,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import org.javalite.http.Http;
@@ -22,7 +23,7 @@ import com.eclipsesource.json.WriterConfig;
 import com.midtrans.mandiri.entity.Item;
 
 @ManagedBean
-@SessionScoped
+@ViewScoped
 public class Charge implements Serializable {
 	
 	private static final long serialVersionUID = -1556716695371482647L;
@@ -43,7 +44,6 @@ public class Charge implements Serializable {
 	private String address;
 	private String city;
 	private String postalCode;
-	
 	// credit card
 	private String tokenId;
 	private String output;
@@ -59,6 +59,8 @@ public class Charge implements Serializable {
 		items.add(item);
 		item = new Item();
 		
+		// recalculate amount
+		grossAmount = 0;
 		for (Item item : items) {
 			grossAmount += item.getPrice();
 		}
@@ -66,15 +68,21 @@ public class Charge implements Serializable {
 	
 	public void removeItem(Item item) {
 		items.remove(item);
+		
+		// recalculate amount
+		grossAmount = 0;
+		for (Item it : items) {
+			grossAmount += it.getPrice();
+		}
 	}
 	
 	@PostConstruct
     private void init(){
 		tokenId = tokenBean.getTokenId();
+		System.out.println("tokenId:" + tokenId);
 		
 //		FacesContext context = FacesContext.getCurrentInstance();
 //		tokenId = context.getExternalContext().getRequestParameterMap().get("tokenId");
-		System.out.println("tokenId:" + tokenId);
 		
         item = new Item();
         items = new ArrayList<>();
@@ -91,7 +99,6 @@ public class Charge implements Serializable {
 									.add("name", item.getQuantity());
 			itemArray.asArray().add(itemObject);
 		}
-		
 		return itemArray;
 	}
 	
@@ -138,6 +145,8 @@ public class Charge implements Serializable {
 		
 		try {
 			output = Json.parse(post.text()).toString(WriterConfig.PRETTY_PRINT);
+			System.out.println("output >>");
+			System.out.println(output);
 		} catch (HttpException e) {
 			FacesContext context = FacesContext.getCurrentInstance();
 			FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "can't connect", "");
