@@ -23,7 +23,7 @@ public class Token3DSecure implements Serializable {
 
 	private static final long serialVersionUID = 1902423758800372002L;
 	// hardcoded
-	private String endPoint = "https://api.stg.veritrans.co.id/v2/token?"
+	private String endPoint = "https://papi-uat1.stg.veritrans.co.id:8080/v2/token?"
 			+ "card_number=%s&"
 			+ "card_cvv=%s&"
 			+ "card_exp_month=%s&"
@@ -34,7 +34,7 @@ public class Token3DSecure implements Serializable {
 			+ "secure=true&"
 			+ "bank=%s&"
 			+ "gross_amount=%s";
-	private String clientKey = "VT-client-Jhr3nDDa56LP6SDu";
+	private String clientKey = "VT-client-2wxBkZy5g18XHT3y";
 	private String vtKey = "v3r1tr4n5-15-n0-1";
 	private String ipAddress = "127.0.0.1";
 	private String bank = "mandiri";

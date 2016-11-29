@@ -18,7 +18,7 @@ public class Cancel implements Serializable {
 
 	private static final long serialVersionUID = -2472899860838320412L;
 	
-	private String endPoint = "https://api.stg.veritrans.co.id/v2/%s/cancel";
+	private String endPoint = "https://papi-uat1.stg.veritrans.co.id:8080/v2/%s/cancel";
 	
 	private String param;
 	private String output;
@@ -37,7 +37,8 @@ public class Cancel implements Serializable {
 		Post post = Http.post(url, "")
                 .header("Accept", "application/json")
                 .header("Content-Type", "application/json")
-                .header("Authorization", "Basic VlQtc2VydmVyLTAwMDAwMDAwMDAwMDAwMDFBMTAwMDAwMDAwMDAwMDAxMDAwMDE4Og==");
+                //.header("Authorization", "Basic VlQtc2VydmVyLTAwMDAwMDAwMDAwMDAwMDFBMTAwMDAwMDAwMDAwMDAxMDAwMDE4Og==");
+				.header("Authorization", "Basic VlQtc2VydmVyLUpzX3hzaDg1SE5Dc05Pcjhyc3V2S0JYdTo=");
 		
 		try {
 			output = Json.parse(post.text()).toString(WriterConfig.PRETTY_PRINT);

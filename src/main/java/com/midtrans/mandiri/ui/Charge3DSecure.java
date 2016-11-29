@@ -28,7 +28,7 @@ public class Charge3DSecure implements Serializable {
 
 	private static final long serialVersionUID = -7452904784970338648L;
 
-	private String endPoint = "https://api.stg.veritrans.co.id/v2/charge"; 
+	private String endPoint = "https://papi-uat1.stg.veritrans.co.id:8080/v2/charge"; 
 	
 	private String output; 
 	private Item item;
@@ -129,7 +129,8 @@ public class Charge3DSecure implements Serializable {
 		Post post = Http.post(endPoint, input)
                 .header("Accept", "application/json")
                 .header("Content-Type", "application/json")
-                .header("Authorization", "Basic VlQtc2VydmVyLXRpdDNkQ3MyMzU4b082RGx3RjJEVmZ2bDo=");
+                //.header("Authorization", "Basic VlQtc2VydmVyLXRpdDNkQ3MyMzU4b082RGx3RjJEVmZ2bDo=");
+                .header("Authorization", "Basic VlQtc2VydmVyLUpzX3hzaDg1SE5Dc05Pcjhyc3V2S0JYdTo=");
 		
 		try {
 			output = Json.parse(post.text()).toString(WriterConfig.PRETTY_PRINT);
