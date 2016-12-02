@@ -22,7 +22,7 @@ public class PointInquiry implements Serializable {
 
 	private static final long serialVersionUID = 7640745019038978097L;
 
-	private String endPoint = "https://papi-uat1.stg.veritrans.co.id:8080/v2/point_inquiry/%s";
+	private String endPoint = "http://papi-uat1.stg.veritrans.co.id:8080/v2/point_inquiry/%s";
 	private String tokenId;
 	private String output;
 	

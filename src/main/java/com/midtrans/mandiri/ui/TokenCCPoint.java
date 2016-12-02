@@ -24,17 +24,17 @@ public class TokenCCPoint implements Serializable {
 	private static final long serialVersionUID = -8270817002171475216L;
 	
 	// hardcoded
-	private String endPoint = "https://papi-uat1.stg.veritrans.co.id:8080/v2/token?"
+	private String endPoint = "http://papi-uat1.stg.veritrans.co.id:8080/v2/token?"
 			+ "card_number=%s&"
 			+ "card_exp_month=%s&"
 			+ "card_exp_year=%s&"
 			+ "card_cvv=%s&"
 			+ "gross_amount=%s&"
-		//	+ "secure=true&"
 			+ "client_key=%s&"
 			+ "vtkey=%s&"
 			+ "bank=%s&"
-			+ "point=true";
+			+ "point=true&"
+			+ "secure=true";
 	//private String clientKey = "VT-client-Jhr3nDDa56LP6SDu";
 	private String clientKey = "VT-client-2wxBkZy5g18XHT3y";
 	private String vtKey = "v3r1tr4n5-15-n0-1";
@@ -47,6 +47,7 @@ public class TokenCCPoint implements Serializable {
 	private String grossAmount;
 	private String tokenId;
 	private String output;
+	private String redirectUrl;
 
 	public String command() {
     	String url = String.format(endPoint, cardNumber, cardExpMonth, cardExpYear, cvv, grossAmount, clientKey, vtKey, bank);
@@ -61,7 +62,8 @@ public class TokenCCPoint implements Serializable {
 	    	JsonValue statusCode = outputObject.get("status_code");
 	    	if ("200".equals(statusCode.asString())) {
 	    		tokenId = outputObject.get("token_id").asString();
-	    		return "chargeCCPoint";
+	    		redirectUrl = outputObject.get("redirect_url").asString();
+	    		return "approvalCCPoint";
 			} else {
 				FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "can't get token", "");
 				context.addMessage(null, fm);
@@ -96,6 +98,10 @@ public class TokenCCPoint implements Serializable {
 			context.addMessage(null, fm);
 		}
     	return null ;
+	}
+	
+	public String process() {
+		return "chargeCCPoint";
 	}
 	
 	public String getEndPoint() {
@@ -156,17 +162,23 @@ public class TokenCCPoint implements Serializable {
 		return tokenId;
 	}
 
-
 	public void setTokenId(String tokenId) {
 		this.tokenId = tokenId;
 	}
-
 
 	public String getOutput() {
 		return output;
 	}
 	public void setOutput(String output) {
 		this.output = output;
+	}
+
+	public String getRedirectUrl() {
+		return redirectUrl;
+	}
+
+	public void setRedirectUrl(String redirectUrl) {
+		this.redirectUrl = redirectUrl;
 	}
 
 	

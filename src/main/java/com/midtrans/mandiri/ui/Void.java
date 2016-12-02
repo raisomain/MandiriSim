@@ -10,6 +10,9 @@ import org.javalite.http.Http;
 import org.javalite.http.HttpException;
 import org.javalite.http.Post;
 
+import com.eclipsesource.json.Json;
+import com.eclipsesource.json.WriterConfig;
+
 @ManagedBean(name = "voided")
 public class Void implements Serializable {
 
@@ -17,17 +20,14 @@ public class Void implements Serializable {
 
 	String endpoint = "https://dragon1.stg.veritrans.co.id:18080/rest/v1/mandiri/execute";
 	
-    private String voidContent = "{\"command\":\"%s\",\"ref_nonce\":\"%s\"}";
-	
-	private String command;
+    private String voidContent = "{\"command\":\"void\",\"ref_nonce\":\"%s\"}";
 	
 	private String refNonce;
 	
 	private String output;
 	
     public void command() {
-    	// String[] params = {command, refNonce};
-    	String msg = String.format(voidContent, command, refNonce);
+    	String msg = String.format(voidContent, refNonce);
     	
     	Post post = Http.post(endpoint, msg)
                 .header("Accept", "application/json")
@@ -35,21 +35,13 @@ public class Void implements Serializable {
                 .header("Authorization", "Basic ZGV2OnJhaGFzaWE=");
     	
 		try {
-			output = post.text();
+			output = Json.parse(post.text()).toString(WriterConfig.PRETTY_PRINT);
 		} catch (HttpException e) {
 			FacesContext context = FacesContext.getCurrentInstance();
 			FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "can't connect", "");
 			context.addMessage(null, fm);
 		}
     }
-
-	public String getCommand() {
-		return command;
-	}
-
-	public void setCommand(String command) {
-		this.command = command;
-	}
 
 	public String getRefNonce() {
 		return refNonce;

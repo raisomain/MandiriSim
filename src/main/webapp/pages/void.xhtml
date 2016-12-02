@@ -12,14 +12,13 @@
 	<ui:define name="content">
 		<h:form>
 			<p:panel header="Void">
-				<h:panelGrid columns="2" cellpadding="4">
-					<h:outputText value="command" />
-					<p:inputText value="#{voided.command}" />
+				<h:panelGrid id="grid" columns="3" cellpadding="4">
 
 					<h:outputText value="Reference Nonce" />
-					<p:inputText value="#{voided.refNonce}" />
+					<p:inputText value="#{voided.refNonce}" id="nonce" required="true"/>
+					<p:message for="nonce" display="icon" />
 
-					<p:commandButton value="Submit" update="output" action="#{voided.command()}" />
+					<p:commandButton value="Submit" update="output grid" action="#{voided.command()}" />
 				</h:panelGrid>
 			</p:panel>
 

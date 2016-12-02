@@ -28,7 +28,7 @@ public class Charge3DSecure implements Serializable {
 
 	private static final long serialVersionUID = -7452904784970338648L;
 
-	private String endPoint = "https://papi-uat1.stg.veritrans.co.id:8080/v2/charge"; 
+	private String endPoint = "http://papi-uat1.stg.veritrans.co.id:8080/v2/charge"; 
 	
 	private String output; 
 	private Item item;
@@ -70,7 +70,7 @@ public class Charge3DSecure implements Serializable {
 	@PostConstruct
     private void init(){
 		tokenId = token3DSecure.getTokenId();
-		System.out.println("tokenId:" + tokenId);
+		System.out.println("tokenId: " + tokenId);
 		
         item = new Item();
         items = new ArrayList<>();
@@ -134,6 +134,8 @@ public class Charge3DSecure implements Serializable {
 		
 		try {
 			output = Json.parse(post.text()).toString(WriterConfig.PRETTY_PRINT);
+			System.out.println("output >>");
+			System.out.println(output);
 		} catch (HttpException e) {
 			FacesContext context = FacesContext.getCurrentInstance();
 			FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "can't connect", "");

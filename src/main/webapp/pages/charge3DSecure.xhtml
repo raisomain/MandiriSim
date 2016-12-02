@@ -51,8 +51,7 @@
 					
 				</h:panelGrid>
 
-				<p:commandButton value="new item" oncomplete="PF('itemDialog').show()" 
-									disabled="#{charge.tokenId eq null}"/>
+				<p:commandButton value="new item" oncomplete="PF('itemDialog').show()" />
 				<br/>
 				<br/>
 				<p:dataTable id="datatable" var="item" value="#{charge3DSecure.items}">
@@ -74,8 +73,7 @@
 					</p:column>
 				</p:dataTable>
 				<br/>
-				<p:commandButton value="Submit" update="output grid" action="#{charge3DSecure.command()}" 
-									disabled="#{charge.tokenId eq null}"/>
+				<p:commandButton value="Submit" update="output grid" action="#{charge3DSecure.command()}" />
 
 				<p:dialog header="new item" widgetVar="itemDialog" resizable="false" closable="true">
 					<p:outputPanel id="itemDetail">

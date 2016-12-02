@@ -28,7 +28,7 @@ public class Charge implements Serializable {
 	
 	private static final long serialVersionUID = -1556716695371482647L;
 
-	private String endPoint = "https://papi-uat1.stg.veritrans.co.id:8080/v2/charge"; 
+	private String endPoint = "http://papi-uat1.stg.veritrans.co.id:8080/v2/charge"; 
 	
 	private Item item;
 	private List<Item> items;

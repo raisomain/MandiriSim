@@ -23,7 +23,7 @@ public class ChargeCCPoint implements Serializable {
 
 	private static final long serialVersionUID = 4793170495874127423L;
 
-	private String endPoint = "https://papi-uat1.stg.veritrans.co.id:8080/v2/charge";
+	private String endPoint = "http://papi-uat1.stg.veritrans.co.id:8080/v2/charge";
 	
 	private String content = "{\"payment_type\":\"credit_card\",\"transaction_details\":{\"order_id\":\"%s\",\"gross_amount\":%s},\"credit_card\":{\"token_id\":\"%s\",\"point_redeem_amount\":%s,\"bank\":\"%s\"}}";
 

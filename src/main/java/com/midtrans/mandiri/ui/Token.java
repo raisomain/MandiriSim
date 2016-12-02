@@ -27,7 +27,7 @@ public class Token implements Serializable {
 	private static final long serialVersionUID = -9053898340504883138L;
 
 	// hardcoded
-	private String endPoint = "https://papi-uat1.stg.veritrans.co.id:8080/v2/token?"
+	private String endPoint = "http://papi-uat1.stg.veritrans.co.id:8080/v2/token?"
 								+ "card_number=%s&"
 								+ "card_cvv=%s&"
 								+ "card_exp_month=%s&"

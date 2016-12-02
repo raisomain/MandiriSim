@@ -23,7 +23,7 @@ public class Token3DSecure implements Serializable {
 
 	private static final long serialVersionUID = 1902423758800372002L;
 	// hardcoded
-	private String endPoint = "https://papi-uat1.stg.veritrans.co.id:8080/v2/token?"
+	private String endPoint = "http://papi-uat1.stg.veritrans.co.id:8080/v2/token?"
 			+ "card_number=%s&"
 			+ "card_cvv=%s&"
 			+ "card_exp_month=%s&"
@@ -47,6 +47,11 @@ public class Token3DSecure implements Serializable {
 	private String output;
 	private String tokenId;
 	private String redirectUrl;
+	
+	public void clear() {
+		output = null;
+		System.out.println("cleared!!!");
+	}
 	
 	public String command() {
 		String url = String.format(endPoint, cardNumber, cvv, cardExpMonth, cardExpYear, ipAddress, clientKey, vtKey, bank, grossAmount);
